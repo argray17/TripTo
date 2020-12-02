@@ -11,12 +11,15 @@ import java.util.Locale;
 public class Money {
   private static final Currency USD = Currency.getInstance("USD");
   private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
-
   private final BigDecimal amount;
   private final Currency currency;
 
   public static Money dollars(BigDecimal amount) {
     return new Money(amount, USD);
+  }
+
+  public Money(BigDecimal amount) {
+    this(amount, USD, DEFAULT_ROUNDING);
   }
 
   Money(BigDecimal amount, Currency currency) {

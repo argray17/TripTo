@@ -1,6 +1,8 @@
 package com.redhawkride.model;
 
+import com.redhawkride.model.locationhandling.Location;
 import com.redhawkride.model.moneyhandling.AccountBalance;
+import com.redhawkride.model.moneyhandling.Money;
 import java.util.ArrayList;
 
 public class Student {
@@ -12,92 +14,119 @@ public class Student {
       address,
       bankAccountNumber,
       bankRoutingNumber;
-  private int driverStatus,
-      riderStatus; // 0 - inactive, 1 - waiting for ride/driver available, 2 - ride in progress
+  private boolean driverStatus;
   private AccountBalance accountBalance;
   private ArrayList<Trip> tripHistory;
 
-  String getStudentID(){
+  public String getStudentID() {
     return studentID;
   }
 
-  String getPassword(){
+  String getPassword() {
     return password;
   }
 
-  String getFirstName(){
+  public String getFirstName() {
     return firstName;
   }
 
-  String getLastName(){
+  public String getLastName() {
     return lastName;
   }
 
-  String getPhoneNumber(){
+  public String getPhoneNumber() {
     return phoneNumber;
   }
 
-  String getAddress(){
+  public String getAddress() {
     return address;
   }
 
-  String getBankAccountNumber(){
+  public String getBankAccountNumber() {
     return bankAccountNumber;
   }
 
-  String getBankRoutingNumber(){
+  public String getBankRoutingNumber() {
     return bankRoutingNumber;
   }
 
-  int getDriverStatus(){
+  boolean getDriverStatus() {
     return driverStatus;
   }
 
-  ArrayList<Trip> gettripHistory(){
+  ArrayList<Trip> getTripHistory() {
     return tripHistory;
   }
 
-  public void setStudentID(String ID){
+  public void setStudentID(String ID) {
     this.studentID = ID;
   }
 
-  public void setPassword(String key){
+  public void setPassword(String key) {
     this.password = key;
   }
 
-  public void setFirstName(String fname){
+  public void setFirstName(String fname) {
     this.firstName = fname;
   }
 
-  public void setLastName(String lname){
+  public void setLastName(String lname) {
     this.lastName = lname;
   }
 
-  public void setPhoneNumber(String pNumber){
+  public void setPhoneNumber(String pNumber) {
     this.phoneNumber = pNumber;
   }
 
-  public void setAddress(String addy){
+  public void setAddress(String addy) {
     this.address = addy;
   }
 
-  public void setBankAccountNumber(String actNumber){
+  public void setBankAccountNumber(String actNumber) {
     this.bankAccountNumber = actNumber;
   }
 
-  public void setBankRoutingNumber(String routNumber){
+  public void setBankRoutingNumber(String routNumber) {
     this.bankRoutingNumber = routNumber;
   }
 
-  public void setRideHistory(ArrayList<Trip> historyList){
+  public void setRideHistory(ArrayList<Trip> historyList) {
     this.tripHistory = historyList;
   }
 
-  public void setIsAvailable(int avaibleFlag){
+  public void setIsAvailable(boolean avaibleFlag) {
     this.driverStatus = avaibleFlag;
   }
 
-  public void addTrip(Trip x){
-    tripHistory.add(x); //insert trip into trip history array
+  public void addTrip(Trip x) {
+    tripHistory.add(x); // insert trip into trip history array
+  }
+
+  public void alertDriver(Trip trip) {
+    Student rider = trip.getRider();
+    String driverMsg = "Pick up for " + rider.getFirstName();
+  }
+
+  public void alertRider(Trip trip) {
+    Student driver = trip.getDriver();
+    String riderMsg = "Pick up by " + driver.getFirstName();
+  }
+
+  public void beginTracking() {}
+
+  public boolean closerThan(Student student) {
+    return true;
+  }
+
+  public void credit(Money amount) {}
+
+  public void debit(Money amount) {}
+
+  public AccountBalance getAccountBalance() {
+    return accountBalance;
+  }
+
+  public Location getCurrentLocation() {
+    return null;
   }
 }
