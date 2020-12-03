@@ -102,8 +102,8 @@ public class Trip {
 
   Money calcTripCost(Date startTime, Date endTime) {
     long time =
-        ((endTime.getTime() - startTime.getTime()) / 1000)
-            % 60; // time difference converted from milliseconds to sec
+        ((endTime.getTime() - startTime.getTime()) / 60000)
+            % 60; // time difference converted from milliseconds to min
     finalTripCost = new Money(new BigDecimal(0.25 * time + 0.5 * getDistance()));
     return finalTripCost;
   }
