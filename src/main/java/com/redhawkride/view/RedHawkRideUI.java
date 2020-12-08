@@ -1,6 +1,12 @@
 package com.redhawkride.view;
 
 
+import com.redhawkride.controller.maps.StudentsMap;
+import com.redhawkride.model.Student;
+import com.redhawkride.model.Trip;
+import com.redhawkride.model.locationhandling.Location;
+
+import java.util.Date;
 import java.util.Scanner;
 
 public class RedHawkRideUI {
@@ -43,7 +49,11 @@ public class RedHawkRideUI {
         System.out.println("Enter your routing number: ");
         String routingNumber = in.nextLine();
 
-        addStudent();
+        StudentsMap.validateStudentID(studentID);
+
+        Student student = new Student();
+
+        StudentsMap.addStudent(student);
     }
     public void rider(){
         System.out.println("\t(1) Provide your start and end location as (latitude, longitude) pairs to receive estimated cost for the ride" +
@@ -54,24 +64,27 @@ public class RedHawkRideUI {
         do {
             switch (choice) {
                 case 1:
-                    System.out.println("Enter your start location latitude: \n");
-                    //read input
+                    System.out.println("Enter your start location latitude, longitude pair: \n");
+                    Float startLat = in.nextFloat();
 
                     System.out.println("Enter your start location longitude: \n");
-                    //read input
+                    Float startLon = in.nextFloat();
+
+                    Location startLocation = new Location(startLat, startLon);
 
                     System.out.println("Enter your end location latitude: \n");
-                    //read input
+                    Float endLat = in.nextFloat();
 
                     System.out.println("Enter your end location longitude: \n");
-                    //read input
+                    Float endLon = in.nextFloat();
 
+                    Location endLocation = new Location(startLat, startLon);
                     //estimate trip cost and display cost
-                    estimateTripCost();
+                    Trip.estimateTripCost(startLocation, endLocation);
                     break;
 
                 case 2:
-                    requestTrip();
+                    requestTrip();//how are we doing this
                     break;
                 case 3:
                     //no clue where history is;
@@ -96,28 +109,39 @@ public class RedHawkRideUI {
                     char drivingOption = in.next().charAt(0);
 
                     if(drivingOption == 'S' || drivingOption == 's')
-                        isAvailable();
+                        Student.setIsAvailable(true);
 
                     if(drivingOption == 'E' || drivingOption == 'e')
-                        notAvailable();
+                        Student.setIsAvailable(false);
                     break;
 
                 case 2:
-                    System.out.println("Enter S or start ride. Enter F for finish ride.\n");
+                    System.out.println("Enter S for start ride. Enter F for finish ride.\n");
                     char rideOption = in.next().charAt(0);
 
-                    if(rideOption == 'S' || rideOption == 's')
+                    if(rideOption == 'S' || rideOption == 's') {
                         startride;
+                        Date startTime = new Date();
+                        Trip.setStartTime(startTime);
+                    }
 
-                    if(rideOption == 'F' || rideOption == 'f')
+
+                    if(rideOption == 'F' || rideOption == 'f') {
                         endride;
+                        Date endTime = new Date();
+                        Trip.setEndTime(endTime);
+                    }
+
                     break;
                 case 3:
+                    Location driverLoc = new Location(0,0);
                     System.out.println("Enter your location latitude: \n");
-                    //read input
+                    Float updateLat = in.nextFloat();
 
                     System.out.println("Enter your location longitude: \n");
-                    //read input
+                    Float updateLon = in.nextFloat();
+
+                    Location updateLocation = new Location(updateLat, updateLon);
                     break;
                 case 4:
                     mainMenu();

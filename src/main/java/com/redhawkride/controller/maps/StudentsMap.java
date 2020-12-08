@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class StudentsMap {
-  HashMap<String, Student> mapOfStudents;
+  static HashMap<String, Student> mapOfStudents;
 
   public StudentsMap(HashMap mapOfStudents) {
     this.mapOfStudents = mapOfStudents;
   }
 
-  public boolean addStudent(Student student) {
+  public static boolean addStudent(Student student) {
     String key = student.getStudentID();
     if (mapOfStudents.containsKey(key)) {
       System.out.println("An account already exists under this Student ID.");
@@ -30,7 +30,7 @@ public class StudentsMap {
     }
   }
 
-  public boolean validateStudentID(String key) {
+  public static boolean validateStudentID(String key) {
     if (mapOfStudents.containsKey(key)) {
       return true;
     } else {

@@ -94,7 +94,7 @@ public class Student {
     this.tripHistory = historyList;
   }
 
-  public void setIsAvailable(boolean avaibleFlag) {
+  public static void setIsAvailable(boolean avaibleFlag) {
     this.driverStatus = avaibleFlag;
   }
 
