@@ -64,7 +64,7 @@ public class RedHawkRideUI {
         do {
             switch (choice) {
                 case 1:
-                    System.out.println("Enter your start location latitude, longitude pair: \n");
+                    System.out.println("Enter your start location latitude: \n");
                     Float startLat = in.nextFloat();
 
                     System.out.println("Enter your start location longitude: \n");
@@ -80,7 +80,7 @@ public class RedHawkRideUI {
 
                     Location endLocation = new Location(startLat, startLon);
                     //estimate trip cost and display cost
-                    Trip.estimateTripCost(startLocation, endLocation);
+                    System.out.println("Your estimated cost is: "  + Trip.estimateTripCost(startLocation, endLocation));
                     break;
 
                 case 2:
