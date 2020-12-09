@@ -12,11 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TripsMap {
-  private final HashMap<String, Trip> mapOfTrips;
+  private HashMap<String, Trip> mapOfTrips = new HashMap<>();
 
-  public TripsMap(HashMap mapOfTrips) {
-    this.mapOfTrips = mapOfTrips;
-  }
+  public TripsMap() {}
 
   public void addTrip(Trip trip) {
     String key = genUniqueKey();
@@ -121,7 +119,7 @@ public class TripsMap {
     printWriter.flush();
   }
 
-  public Trip findStudent(String tripID) {
+  public Trip findTrip(String tripID) {
     return mapOfTrips.get(tripID);
   }
 }

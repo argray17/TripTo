@@ -14,9 +14,7 @@ import java.util.Iterator;
 public class StudentsMap {
   public HashMap<String, Student> mapOfStudents;
 
-  public StudentsMap(HashMap mapOfStudents) {
-    this.mapOfStudents = mapOfStudents;
-  }
+  public StudentsMap() {}
 
   public boolean addStudent(Student student) {
     String key = student.getStudentID();

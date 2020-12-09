@@ -1,6 +1,5 @@
 package com.redhawkride.controller;
 
-import com.redhawkride.controller.filehandling.LoadFromFile;
 import com.redhawkride.controller.filehandling.RecordToFile;
 import com.redhawkride.controller.lists.StudentsList;
 import com.redhawkride.controller.lists.TripsList;
@@ -11,8 +10,10 @@ import com.redhawkride.model.Trip;
 import com.redhawkride.model.locationhandling.RouteLog;
 import com.redhawkride.model.moneyhandling.BankTransaction;
 import com.redhawkride.model.moneyhandling.Money;
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class RedHawkRideController {
   private StudentsMap mapOfStudents;
@@ -20,7 +21,7 @@ public class RedHawkRideController {
   private StudentsList listOfAvailableDrivers, listOfDriversOnATrip;
   private TripsList listOfUnchargedTrips, listOfTripsInProgress;
 
-  public RedHawkRideController() {
+  public RedHawkRideController() throws IOException, ParseException {
     setMapOfStudents();
     setMapOfTrips();
     setListOfUnchargedTrips();
@@ -29,19 +30,22 @@ public class RedHawkRideController {
     listOfTripsInProgress = new TripsList();
   }
 
-  public void setMapOfStudents() {
-    HashMap<String, Student> mapOfStudents = LoadFromFile.studentMap();
-    this.mapOfStudents = new StudentsMap(mapOfStudents);
+  public void setMapOfStudents() throws IOException {
+    File file = new File("src/main/java/com/redhawkride/data/Students.csv");
+    mapOfStudents = new StudentsMap();
+    mapOfStudents.loadFromFile(file);
   }
 
-  public void setMapOfTrips() {
-    HashMap<String, Trip> mapOfTrips = LoadFromFile.tripsMap();
-    this.mapOfTrips = new TripsMap(mapOfTrips);
+  public void setMapOfTrips() throws IOException, ParseException {
+    File file = new File("src/main/java/com/redhawkride/data/Trips.csv");
+    mapOfTrips = new TripsMap();
+    mapOfTrips.loadFromFile(file, this);
   }
 
-  public void setListOfUnchargedTrips() {
-    ArrayList<Trip> listOfUnchargedTrips = LoadFromFile.unchargedTripsList();
-    this.listOfUnchargedTrips = new TripsList(listOfUnchargedTrips);
+  public void setListOfUnchargedTrips() throws IOException {
+    File file = new File("src/main/java/com/redhawkride/data/UnchargedTrips.csv");
+    this.listOfUnchargedTrips = new TripsList();
+    listOfUnchargedTrips.loadFromFile(file, this);
   }
 
   public void setDriverStatus(Student student, boolean isAvailable) {
@@ -146,5 +150,9 @@ public class RedHawkRideController {
 
   public Student findStudent(String studentID) {
     return mapOfStudents.findStudent(studentID);
+  }
+
+  public Trip findTrip(String tripID) {
+    return mapOfTrips.findTrip((tripID));
   }
 }
