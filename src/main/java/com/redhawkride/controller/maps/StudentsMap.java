@@ -1,7 +1,5 @@
 package com.redhawkride.controller.maps;
 
-import com.redhawkride.controller.filehandling.LoadFromFile;
-import com.redhawkride.controller.filehandling.RecordToFile;
 import com.redhawkride.model.Student;
 import com.redhawkride.model.moneyhandling.AccountBalance;
 import com.redhawkride.model.moneyhandling.Money;
@@ -14,21 +12,27 @@ import java.util.Iterator;
 public class StudentsMap {
   public HashMap<String, Student> mapOfStudents;
 
-  public StudentsMap() {}
+  public StudentsMap() {
+    mapOfStudents = new HashMap<>();
+  }
 
   public boolean addStudent(Student student) {
     String key = student.getStudentID();
     if (mapOfStudents.containsKey(key)) {
       System.out.println("An account already exists under this Student ID.");
       return false;
-    } else if (LoadFromFile.validateStudentID()) {
+      // } else if (LoadFromFile.validateStudentID()) {
+    } else {
       mapOfStudents.put(key, student);
-      RecordToFile.createdAccount(student);
+      // RecordToFile.createdAccount(student);
       return true;
+    }
+    /*
     } else {
       System.out.println("There is no record of this Student ID.");
       return false;
     }
+    */
   }
 
   public boolean validateStudentID(String key) {
@@ -58,6 +62,7 @@ public class StudentsMap {
   }
 
   public void loadFromFile(File file) throws IOException {
+
     FileReader fileReader = new FileReader(file);
     BufferedReader bufferedReader = new BufferedReader(fileReader);
     String line;
@@ -72,7 +77,7 @@ public class StudentsMap {
       String address = values[5];
       String bankAccountNumber = values[6];
       String bankRoutingNumber = values[7];
-      BigDecimal bigDecimal = new BigDecimal(values[8]);
+      BigDecimal bigDecimal = new BigDecimal(Double.valueOf(values[8]));
       Money money = new Money(bigDecimal);
       AccountBalance accountBalance = new AccountBalance(money);
       Student student =

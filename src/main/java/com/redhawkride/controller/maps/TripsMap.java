@@ -12,9 +12,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TripsMap {
-  private HashMap<String, Trip> mapOfTrips = new HashMap<>();
+  private HashMap<String, Trip> mapOfTrips;
 
-  public TripsMap() {}
+  public TripsMap() {
+    mapOfTrips = new HashMap<>();
+  }
 
   public void addTrip(Trip trip) {
     String key = genUniqueKey();
@@ -54,9 +56,9 @@ public class TripsMap {
       Date startTime = dateFormat.parse(startTimeStr);
       String endTimeStr = values[8];
       Date endTime = dateFormat.parse(endTimeStr);
-      BigDecimal bigDecimal = new BigDecimal(values[9]);
+      BigDecimal bigDecimal = new BigDecimal(Double.valueOf(values[9]));
       Money estimatedTripCost = new Money(bigDecimal);
-      bigDecimal = new BigDecimal(values[10]);
+      bigDecimal = new BigDecimal(Double.valueOf(values[10]));
       Money finalTripCost = new Money(bigDecimal);
 
       Trip trip =
@@ -72,7 +74,7 @@ public class TripsMap {
               finalTripCost);
 
       driver.addTrip(trip);
-      rider.addTrip(trip);
+      // rider.addTrip(trip);
 
       mapOfTrips.put(trip.getTripID(), trip);
     }

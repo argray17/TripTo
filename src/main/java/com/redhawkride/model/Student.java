@@ -18,8 +18,9 @@ public class Student {
   private ArrayList<Trip> tripHistory;
   private boolean isAvailable = false;
 
-  public Student() {}
-  ;
+  public Student() {
+    tripHistory = new ArrayList<>();
+  }
 
   public Student(
       String studentID,
@@ -40,6 +41,7 @@ public class Student {
     this.bankAccountNumber = bankAccountNumber;
     this.bankRoutingNumber = bankRoutingNumber;
     this.accountBalance = accountBalance;
+    tripHistory = new ArrayList<>();
   }
 
   public String getStudentID() {
@@ -74,7 +76,7 @@ public class Student {
     return bankRoutingNumber;
   }
 
-  ArrayList<Trip> getTripHistory() {
+  public ArrayList<Trip> getTripHistory() {
     return tripHistory;
   }
 
