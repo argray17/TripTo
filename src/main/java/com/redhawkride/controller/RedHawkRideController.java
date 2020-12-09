@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class RedHawkRideController {
   private StudentsMap mapOfStudents;
@@ -42,13 +41,13 @@ public class RedHawkRideController {
   public void setMapOfTrips() throws IOException, ParseException {
     File file = new File("src/main/java/com/redhawkride/data/Trips.csv");
     mapOfTrips = new TripsMap();
-    mapOfTrips.loadFromFile(file, this);
+    mapOfTrips.loadFromFile(file, mapOfStudents);
   }
 
   public void setListOfUnchargedTrips() throws IOException {
     File file = new File("src/main/java/com/redhawkride/data/UnchargedTrips.csv");
     this.listOfUnchargedTrips = new TripsList();
-    listOfUnchargedTrips.loadFromFile(file, this);
+    listOfUnchargedTrips.loadFromFile(file, mapOfTrips);
   }
 
   public void setDriverStatus(Student student, boolean isAvailable) {

@@ -135,6 +135,6 @@ public class StudentsMap {
   }
 
   public Student findStudent(String studentID) {
-    return mapOfStudents.get(studentID);
+    return (Student) mapOfStudents.get(studentID);
   }
 }

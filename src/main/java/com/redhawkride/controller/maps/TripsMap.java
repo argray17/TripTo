@@ -32,7 +32,7 @@ public class TripsMap {
     return key;
   }
 
-  public void loadFromFile(File file, RedHawkRideController rHRController)
+  public void loadFromFile(File file, StudentsMap mapOfStudents)
       throws IOException, ParseException {
     FileReader fileReader = new FileReader(file);
     BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -42,9 +42,10 @@ public class TripsMap {
     while ((line = bufferedReader.readLine()) != null) {
       String[] values = line.split(",");
       String driverID = values[0];
-      Student driver = rHRController.findStudent(driverID);
+      System.out.println(mapOfStudents.findStudent(driverID));
+      Student driver = mapOfStudents.findStudent(driverID);
       String riderID = values[1];
-      Student rider = rHRController.findStudent(riderID);
+      Student rider = mapOfStudents.findStudent(riderID);
       String tripID = values[2];
       Float startLocationLat = Float.parseFloat(values[3]);
       Float startLocationLon = Float.parseFloat(values[4]);
