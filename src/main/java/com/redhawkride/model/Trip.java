@@ -124,14 +124,13 @@ public class Trip {
     return estimatedTripCost;
   }
 
-  public Money calcTripCost(
-      Date startTime, Date endTime, Location beginLocation, Location endLocation) {
+  public void calcTripCost() {
     long time =
         ((endTime.getTime() - startTime.getTime()) / 60000)
             % 60; // time difference converted from milliseconds to min
     finalTripCost =
-        new Money(new BigDecimal(0.25 * time + 0.5 * getDistance(beginLocation, endLocation)));
-    return finalTripCost;
+        new Money(new BigDecimal(0.25 * time + 0.5 * getDistance(startLocation, endLocation)));
+
   }
 
   public String getTripID() {
@@ -142,11 +141,12 @@ public class Trip {
     this.tripID = tripID;
   }
 
+  public void setFinalTripCost() {
+    calcTripCost();
+  }
+
   public void setStartTime() {}
-
   public void setEndTime() {}
-
-  public void setFinalTripCost() {}
 
   public Money getFinalTripCost() {
     return finalTripCost;

@@ -96,14 +96,6 @@ public class Student {
     this.lastName = lname;
   }
 
-  public void setPhoneNumber(String pNumber) {
-    this.phoneNumber = pNumber;
-  }
-
-  public void setAddress(String addy) {
-    this.address = addy;
-  }
-
   public void setBankAccountNumber(String actNumber) {
     this.bankAccountNumber = actNumber;
   }
