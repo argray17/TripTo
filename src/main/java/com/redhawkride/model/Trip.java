@@ -16,10 +16,16 @@ public class Trip {
 
   public Trip() {}
 
-  public Trip(Student driver, Student rider, String tripID,
-              Location startLocation, Location endLocation,
-              Date startTime, Date endTime,
-              Money estimatedTripCost, Money finalTripCost) {
+  public Trip(
+      Student driver,
+      Student rider,
+      String tripID,
+      Location startLocation,
+      Location endLocation,
+      Date startTime,
+      Date endTime,
+      Money estimatedTripCost,
+      Money finalTripCost) {
     this.driver = driver;
     this.rider = rider;
     this.tripID = tripID;
@@ -118,11 +124,13 @@ public class Trip {
     return estimatedTripCost;
   }
 
-  public Money calcTripCost(Date startTime, Date endTime, Location beginLocation, Location endLocation) {
+  public Money calcTripCost(
+      Date startTime, Date endTime, Location beginLocation, Location endLocation) {
     long time =
         ((endTime.getTime() - startTime.getTime()) / 60000)
             % 60; // time difference converted from milliseconds to min
-    finalTripCost = new Money(new BigDecimal(0.25 * time + 0.5 * getDistance(beginLocation, endLocation)));
+    finalTripCost =
+        new Money(new BigDecimal(0.25 * time + 0.5 * getDistance(beginLocation, endLocation)));
     return finalTripCost;
   }
 

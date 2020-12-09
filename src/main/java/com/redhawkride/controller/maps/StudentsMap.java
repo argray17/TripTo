@@ -5,7 +5,6 @@ import com.redhawkride.controller.filehandling.RecordToFile;
 import com.redhawkride.model.Student;
 import com.redhawkride.model.moneyhandling.AccountBalance;
 import com.redhawkride.model.moneyhandling.Money;
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class StudentsMap {
     BufferedReader bufferedReader = new BufferedReader(fileReader);
     String line;
 
-    while((line = bufferedReader.readLine()) != null) {
+    while ((line = bufferedReader.readLine()) != null) {
       String[] values = line.split(",");
       String studentID = values[0];
       String password = values[1];
@@ -78,19 +77,28 @@ public class StudentsMap {
       BigDecimal bigDecimal = new BigDecimal(values[8]);
       Money money = new Money(bigDecimal);
       AccountBalance accountBalance = new AccountBalance(money);
-      Student student = new Student(studentID, password, firstName, lastName, phoneNumber,
-              address, bankAccountNumber, bankRoutingNumber, accountBalance);
+      Student student =
+          new Student(
+              studentID,
+              password,
+              firstName,
+              lastName,
+              phoneNumber,
+              address,
+              bankAccountNumber,
+              bankRoutingNumber,
+              accountBalance);
 
       mapOfStudents.put(student.getStudentID(), student);
     }
   }
 
   public void writeToFile(File file) throws IOException {
-    PrintWriter printWriter  = new PrintWriter(file);
+    PrintWriter printWriter = new PrintWriter(file);
     Iterator<HashMap.Entry<String, Student>> iterator = mapOfStudents.entrySet().iterator();
     Student student;
 
-    while(iterator.hasNext()) {
+    while (iterator.hasNext()) {
       StringBuilder stringBuilder = new StringBuilder();
       HashMap.Entry<String, Student> set = (HashMap.Entry<String, Student>) iterator.next();
       student = set.getValue();

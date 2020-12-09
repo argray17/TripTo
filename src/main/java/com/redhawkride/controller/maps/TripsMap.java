@@ -4,9 +4,7 @@ import com.redhawkride.controller.RedHawkRideController;
 import com.redhawkride.model.Student;
 import com.redhawkride.model.Trip;
 import com.redhawkride.model.locationhandling.Location;
-import com.redhawkride.model.moneyhandling.AccountBalance;
 import com.redhawkride.model.moneyhandling.Money;
-
 import java.io.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -34,7 +32,8 @@ public class TripsMap {
     return key;
   }
 
-  public void loadFromFile(File file, RedHawkRideController rHRController) throws IOException, ParseException {
+  public void loadFromFile(File file, RedHawkRideController rHRController)
+      throws IOException, ParseException {
     FileReader fileReader = new FileReader(file);
     BufferedReader bufferedReader = new BufferedReader(fileReader);
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
@@ -62,8 +61,17 @@ public class TripsMap {
       bigDecimal = new BigDecimal(values[10]);
       Money finalTripCost = new Money(bigDecimal);
 
-      Trip trip = new Trip(driver, rider, tripID, startLocation,
-              endLocation, startTime, endTime, estimatedTripCost, finalTripCost);
+      Trip trip =
+          new Trip(
+              driver,
+              rider,
+              tripID,
+              startLocation,
+              endLocation,
+              startTime,
+              endTime,
+              estimatedTripCost,
+              finalTripCost);
 
       driver.addTrip(trip);
       rider.addTrip(trip);
@@ -71,47 +79,49 @@ public class TripsMap {
       mapOfTrips.put(trip.getTripID(), trip);
     }
   }
-    public void writeToFile(File file) throws IOException {
-      PrintWriter printWriter  = new PrintWriter(file);
-      Iterator<HashMap.Entry<String, Trip>> iterator = mapOfTrips.entrySet().iterator();
-      SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-      Trip trip;
 
-      while(iterator.hasNext()) {
-        StringBuilder stringBuilder = new StringBuilder();
-        HashMap.Entry<String, Trip> set = (HashMap.Entry<String, Trip>) iterator.next();
-        trip = set.getValue();
+  public void writeToFile(File file) throws IOException {
+    PrintWriter printWriter = new PrintWriter(file);
+    Iterator<HashMap.Entry<String, Trip>> iterator = mapOfTrips.entrySet().iterator();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+    Trip trip;
 
-        String driver = trip.getDriver().getStudentID();
-        String rider = trip.getRider().getStudentID();
-        String tripID = trip.getTripID();
-        String startLocationLat= Float.toString(trip.getStartLocation().getLatitude());
-        String startLocationLon= Float.toString(trip.getStartLocation().getLongitude());
-        String endLocationLat= Float.toString(trip.getEndLocation().getLatitude());
-        String endLocationLon= Float.toString(trip.getEndLocation().getLongitude());
-        String startTime = dateFormat.format(trip.getStartTime());
-        String endTime = dateFormat.format(trip.getEndTime());
-        String estimatedTripCost = String.valueOf(trip.getEstimatedTripCost().getAmount().doubleValue());
-        String finalTripCost = String.valueOf(trip.getFinalTripCost().getAmount().doubleValue());
+    while (iterator.hasNext()) {
+      StringBuilder stringBuilder = new StringBuilder();
+      HashMap.Entry<String, Trip> set = (HashMap.Entry<String, Trip>) iterator.next();
+      trip = set.getValue();
 
-        stringBuilder.append(driver + ",");
-        stringBuilder.append(rider + ",");
-        stringBuilder.append(tripID + ",");
-        stringBuilder.append(startLocationLat + ",");
-        stringBuilder.append(startLocationLon + ",");
-        stringBuilder.append(endLocationLat + ",");
-        stringBuilder.append(endLocationLon + ",");
-        stringBuilder.append(startTime + ",");
-        stringBuilder.append(endTime + ",");
-        stringBuilder.append(estimatedTripCost + ",");
-        stringBuilder.append(finalTripCost + "\n");
+      String driver = trip.getDriver().getStudentID();
+      String rider = trip.getRider().getStudentID();
+      String tripID = trip.getTripID();
+      String startLocationLat = Float.toString(trip.getStartLocation().getLatitude());
+      String startLocationLon = Float.toString(trip.getStartLocation().getLongitude());
+      String endLocationLat = Float.toString(trip.getEndLocation().getLatitude());
+      String endLocationLon = Float.toString(trip.getEndLocation().getLongitude());
+      String startTime = dateFormat.format(trip.getStartTime());
+      String endTime = dateFormat.format(trip.getEndTime());
+      String estimatedTripCost =
+          String.valueOf(trip.getEstimatedTripCost().getAmount().doubleValue());
+      String finalTripCost = String.valueOf(trip.getFinalTripCost().getAmount().doubleValue());
 
-        printWriter.print(stringBuilder.toString());
-      }
-      printWriter.flush();
+      stringBuilder.append(driver + ",");
+      stringBuilder.append(rider + ",");
+      stringBuilder.append(tripID + ",");
+      stringBuilder.append(startLocationLat + ",");
+      stringBuilder.append(startLocationLon + ",");
+      stringBuilder.append(endLocationLat + ",");
+      stringBuilder.append(endLocationLon + ",");
+      stringBuilder.append(startTime + ",");
+      stringBuilder.append(endTime + ",");
+      stringBuilder.append(estimatedTripCost + ",");
+      stringBuilder.append(finalTripCost + "\n");
+
+      printWriter.print(stringBuilder.toString());
     }
+    printWriter.flush();
+  }
 
-    public Trip findStudent(String tripID) {
-      return mapOfTrips.get(tripID);
-    }
+  public Trip findStudent(String tripID) {
+    return mapOfTrips.get(tripID);
+  }
 }

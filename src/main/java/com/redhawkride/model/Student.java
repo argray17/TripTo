@@ -18,11 +18,19 @@ public class Student {
   private ArrayList<Trip> tripHistory;
   private boolean isAvailable = false;
 
-  public Student() {};
+  public Student() {}
+  ;
 
-  public Student(String studentID, String password, String firstName, String lastName,
-                 String phoneNumber, String address, String bankAccountNumber,
-                 String bankRoutingNumber, AccountBalance accountBalance) {
+  public Student(
+      String studentID,
+      String password,
+      String firstName,
+      String lastName,
+      String phoneNumber,
+      String address,
+      String bankAccountNumber,
+      String bankRoutingNumber,
+      AccountBalance accountBalance) {
     this.studentID = studentID;
     this.password = password;
     this.firstName = firstName;
