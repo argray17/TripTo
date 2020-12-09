@@ -19,7 +19,8 @@ public class Money {
   }
 
   public Money(BigDecimal amount) {
-    this(amount, USD, DEFAULT_ROUNDING);
+    this.amount = amount;
+    this.currency = USD;
   }
 
   Money(BigDecimal amount, Currency currency) {

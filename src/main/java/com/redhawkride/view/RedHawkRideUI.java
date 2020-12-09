@@ -1,15 +1,21 @@
 package com.redhawkride.view;
 
 
-import com.redhawkride.controller.maps.StudentsMap;
+import com.redhawkride.controller.RedHawkRideController;
 import com.redhawkride.model.Student;
 import com.redhawkride.model.Trip;
 import com.redhawkride.model.locationhandling.Location;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class RedHawkRideUI {
+    private RedHawkRideController rHRController;
+    private Student currentStudent;
+    private Trip currentTrip;
+
+    public RedHawkRideUI(RedHawkRideController rHRController) {
+        this.rHRController = rHRController;
+    }
 
     Scanner in = new Scanner(System.in);
 
@@ -49,11 +55,11 @@ public class RedHawkRideUI {
         System.out.println("Enter your routing number: ");
         String routingNumber = in.nextLine();
 
-        StudentsMap.validateStudentID(studentID);
+        rHRController.validateStudentID(studentID);
 
         Student student = new Student();
 
-        StudentsMap.addStudent(student);
+        rHRController.addCreatedAccount(student);
     }
     public void rider(){
         System.out.println("\t(1) Provide your start and end location as (latitude, longitude) pairs to receive estimated cost for the ride" +
@@ -64,6 +70,7 @@ public class RedHawkRideUI {
         do {
             switch (choice) {
                 case 1:
+                    Trip trip = new Trip();
                     System.out.println("Enter your start location latitude: \n");
                     Float startLat = in.nextFloat();
 
@@ -80,11 +87,13 @@ public class RedHawkRideUI {
 
                     Location endLocation = new Location(startLat, startLon);
                     //estimate trip cost and display cost
-                    System.out.println("Your estimated cost is: "  + Trip.estimateTripCost(startLocation, endLocation));
+                    System.out.println("Your estimated cost is: "  + currentTrip.estimateTripCost(startLocation, endLocation));
+
+                    rHRController.requestTrip(currentTrip);
                     break;
 
                 case 2:
-                    requestTrip();//how are we doing this
+                    rHRController.requestTrip(currentTrip);//how are we doing this
                     break;
                 case 3:
                     //no clue where history is;
@@ -109,10 +118,10 @@ public class RedHawkRideUI {
                     char drivingOption = in.next().charAt(0);
 
                     if(drivingOption == 'S' || drivingOption == 's')
-                        Student.setIsAvailable(true);
+                        rHRController.setDriverStatus(currentStudent, true);
 
                     if(drivingOption == 'E' || drivingOption == 'e')
-                        Student.setIsAvailable(false);
+                        rHRController.setDriverStatus(currentStudent, false);
                     break;
 
                 case 2:
@@ -120,16 +129,11 @@ public class RedHawkRideUI {
                     char rideOption = in.next().charAt(0);
 
                     if(rideOption == 'S' || rideOption == 's') {
-                        startride;
-                        Date startTime = new Date();
-                        Trip.setStartTime(startTime);
+                        rHRController.startTrip(currentTrip);
                     }
 
-
                     if(rideOption == 'F' || rideOption == 'f') {
-                        endride;
-                        Date endTime = new Date();
-                        Trip.setEndTime(endTime);
+                        rHRController.endTrip(currentTrip);
                     }
 
                     break;

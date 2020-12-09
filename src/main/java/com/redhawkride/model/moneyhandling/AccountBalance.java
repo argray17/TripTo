@@ -6,6 +6,10 @@ public class AccountBalance {
   private Money currentBalance;
   private ArrayList<BankTransaction> transactionHistory;
 
+  public AccountBalance(Money currentBalance) {
+    this.currentBalance = currentBalance;
+  }
+
   public Money getCurrentBalance() {
     return currentBalance;
   }

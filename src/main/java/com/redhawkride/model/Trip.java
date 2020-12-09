@@ -7,13 +7,29 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Trip {
-  private static Money estimatedTripCost;
+  private Money estimatedTripCost, finalTripCost;
   private Student driver, rider;
   private String tripID;
   private Location startLocation, endLocation;
   private Date startTime, endTime;
   private RouteLog routeLog;
-  private Money finalTripCost;
+
+  public Trip() {}
+
+  public Trip(Student driver, Student rider, String tripID,
+              Location startLocation, Location endLocation,
+              Date startTime, Date endTime,
+              Money estimatedTripCost, Money finalTripCost) {
+    this.driver = driver;
+    this.rider = rider;
+    this.tripID = tripID;
+    this.startLocation = startLocation;
+    this.endLocation = endLocation;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.estimatedTripCost = estimatedTripCost;
+    this.finalTripCost = finalTripCost;
+  }
 
   public Student getDriver() {
     return driver;
@@ -23,7 +39,7 @@ public class Trip {
     return rider;
   }
 
-  Money getTripCost() {
+  public Money getTripCost() {
     return finalTripCost;
   }
 
@@ -67,7 +83,7 @@ public class Trip {
     this.endTime = endTime;
   }
 
-  static double getDistance(Location startLocation, Location endLocation) {
+  public static double getDistance(Location startLocation, Location endLocation) {
     double latitudeBegin = startLocation.getLatitude(); // idk how we are handling lon/lat pairs
     double longitudeBegin = startLocation.getLongitude();
 
@@ -97,12 +113,12 @@ public class Trip {
     return distance;
   }
 
-  public static Money estimateTripCost(Location beginLocation, Location endLocation) {
+  public Money estimateTripCost(Location beginLocation, Location endLocation) {
     estimatedTripCost = new Money(new BigDecimal(1.25 * getDistance(beginLocation, endLocation)));
     return estimatedTripCost;
   }
 
-  Money calcTripCost(Date startTime, Date endTime, Location beginLocation, Location endLocation) {
+  public Money calcTripCost(Date startTime, Date endTime, Location beginLocation, Location endLocation) {
     long time =
         ((endTime.getTime() - startTime.getTime()) / 60000)
             % 60; // time difference converted from milliseconds to min
@@ -118,7 +134,7 @@ public class Trip {
     this.tripID = tripID;
   }
 
-  public static void setStartTime() {}
+  public void setStartTime() {}
 
   public void setEndTime() {}
 
@@ -132,5 +148,9 @@ public class Trip {
 
   public void logLocation(boolean atEndOfTrip) {
     routeLog.addEvent(driver.getCurrentLocation(), new Date(), atEndOfTrip);
+  }
+
+  public Money getEstimatedTripCost() {
+    return this.estimatedTripCost;
   }
 }

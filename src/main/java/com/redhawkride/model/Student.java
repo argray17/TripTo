@@ -14,15 +14,31 @@ public class Student {
       address,
       bankAccountNumber,
       bankRoutingNumber;
-  private boolean driverStatus;
   private AccountBalance accountBalance;
   private ArrayList<Trip> tripHistory;
+  private boolean isAvailable = false;
+
+  public Student() {};
+
+  public Student(String studentID, String password, String firstName, String lastName,
+                 String phoneNumber, String address, String bankAccountNumber,
+                 String bankRoutingNumber, AccountBalance accountBalance) {
+    this.studentID = studentID;
+    this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
+    this.bankAccountNumber = bankAccountNumber;
+    this.bankRoutingNumber = bankRoutingNumber;
+    this.accountBalance = accountBalance;
+  }
 
   public String getStudentID() {
     return studentID;
   }
 
-  String getPassword() {
+  public String getPassword() {
     return password;
   }
 
@@ -48,10 +64,6 @@ public class Student {
 
   public String getBankRoutingNumber() {
     return bankRoutingNumber;
-  }
-
-  boolean getDriverStatus() {
-    return driverStatus;
   }
 
   ArrayList<Trip> getTripHistory() {
@@ -94,10 +106,6 @@ public class Student {
     this.tripHistory = historyList;
   }
 
-  public static void setIsAvailable(boolean avaibleFlag) {
-    this.driverStatus = avaibleFlag;
-  }
-
   public void addTrip(Trip x) {
     tripHistory.add(x); // insert trip into trip history array
   }
@@ -128,5 +136,9 @@ public class Student {
 
   public Location getCurrentLocation() {
     return null;
+  }
+
+  public void setIsAvailable(boolean isAvailable) {
+    this.isAvailable = isAvailable;
   }
 }

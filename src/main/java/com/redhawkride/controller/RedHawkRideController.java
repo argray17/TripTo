@@ -143,4 +143,8 @@ public class RedHawkRideController {
   private void processTransaction(BankTransaction transaction) {
     RecordToFile.bankTransaction(transaction);
   }
+
+  public Student findStudent(String studentID) {
+    return mapOfStudents.findStudent(studentID);
+  }
 }
