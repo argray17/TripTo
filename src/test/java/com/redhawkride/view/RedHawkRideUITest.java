@@ -1,7 +1,5 @@
 package com.redhawkride.view;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.redhawkride.controller.RedHawkRideController;
 import java.io.IOException;
 import java.text.ParseException;

@@ -1,6 +1,8 @@
 package com.redhawkride.controller.lists;
 
 import com.redhawkride.controller.RedHawkRideController;
+import com.redhawkride.controller.maps.StudentsMap;
+import com.redhawkride.controller.maps.TripsMap;
 import com.redhawkride.model.Trip;
 import java.io.*;
 import java.util.ArrayList;
@@ -24,14 +26,14 @@ public class TripsList {
     return listOfUnchargedTrips;
   }
 
-  public void loadFromFile(File file, RedHawkRideController rHRController) throws IOException {
+  public void loadFromFile(File file, TripsMap mapOfTrips) throws IOException {
     FileReader fileReader = new FileReader(file);
     BufferedReader bufferedReader = new BufferedReader(fileReader);
 
     String tripID;
 
     while ((tripID = bufferedReader.readLine()) != null) {
-      Trip trip = rHRController.findTrip(tripID);
+      Trip trip = mapOfTrips.findTrip(tripID);
       listOfUnchargedTrips.add(trip);
     }
   }
