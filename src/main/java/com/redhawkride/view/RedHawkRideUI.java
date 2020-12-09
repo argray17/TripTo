@@ -86,7 +86,7 @@ public class RedHawkRideUI {
           System.out.println("Enter your end location longitude: \n");
           Float endLon = in.nextFloat();
 
-          Location endLocation = new Location(startLat, startLon);
+          Location endLocation = new Location(endLat, endLon);
           // estimate trip cost and display cost
           System.out.println(
               "Your estimated cost is: "
@@ -96,7 +96,7 @@ public class RedHawkRideUI {
           break;
 
         case 2:
-          rHRController.requestTrip(currentTrip); // how are we doing this
+          rHRController.requestTrip(currentTrip);
           break;
         case 3:
           // no clue where history is;
