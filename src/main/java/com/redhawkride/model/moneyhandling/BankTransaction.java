@@ -35,4 +35,32 @@ public class BankTransaction {
     student.getAccountBalance().addTransaction(this);
     student.getAccountBalance().addToBalance(amountOfTransaction);
   }
+
+  public Student getStudent() {
+    return this.student;
+  }
+
+  public String getBankAccountNumber() {
+    return this.bankAccountNumber;
+  }
+
+  public String getRoutingNumber() {
+    return this.bankRoutingNumber;
+  }
+
+  public Date getDateOfTransaction() {
+    return this.dateOfTransaction;
+  }
+
+  public Money getAmountOfTransaction() {
+    return this.amountOfTransaction;
+  }
+
+  public Money getInitialBalance() {
+    return this.initialBalance;
+  }
+
+  public Money getUpdatedBalance() {
+    return this.updatedBalance;
+  }
 }

@@ -1,6 +1,5 @@
 package com.redhawkride.controller;
 
-import com.redhawkride.controller.filehandling.RecordToFile;
 import com.redhawkride.controller.lists.StudentsList;
 import com.redhawkride.controller.lists.TripsList;
 import com.redhawkride.controller.maps.StudentsMap;
@@ -11,9 +10,13 @@ import com.redhawkride.model.locationhandling.RouteLog;
 import com.redhawkride.model.moneyhandling.BankTransaction;
 import com.redhawkride.model.moneyhandling.Money;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RedHawkRideController {
   private StudentsMap mapOfStudents;
@@ -135,7 +138,7 @@ public class RedHawkRideController {
     return amount;
   }
 
-  public void processBalances() {
+  public void processBalances() throws FileNotFoundException {
     ArrayList<Student> studentsToProcess = mapOfStudents.processStudentBalances();
 
     for (Student student : studentsToProcess) {
@@ -144,8 +147,30 @@ public class RedHawkRideController {
     }
   }
 
-  private void processTransaction(BankTransaction transaction) {
-    RecordToFile.bankTransaction(transaction);
+  private void processTransaction(BankTransaction transaction) throws FileNotFoundException {
+    File file = new File("src/main/java/com/redhawkride/data/BankTransactions.csv");
+    PrintWriter printWriter = new PrintWriter(file);
+    StringBuilder stringBuilder = new StringBuilder();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+
+    String student = transaction.getStudent().getStudentID();
+    String bankAccountNumber = transaction.getBankAccountNumber();
+    String bankRoutingNumber = transaction.getRoutingNumber();
+    String dateOfTransaction = dateFormat.format(transaction.getDateOfTransaction());
+    String amountOfTransaction = String.valueOf(transaction.getAmountOfTransaction().getAmount().doubleValue());
+    String initialBalance = String.valueOf(transaction.getInitialBalance().getAmount().doubleValue());
+    String updatedBalance = String.valueOf(transaction.getUpdatedBalance().getAmount().doubleValue());
+
+    stringBuilder.append(student + ",");
+    stringBuilder.append(bankAccountNumber + ",");
+    stringBuilder.append(bankRoutingNumber + ",");
+    stringBuilder.append(dateOfTransaction + ",");
+    stringBuilder.append(amountOfTransaction + ",");
+    stringBuilder.append(initialBalance + ",");
+    stringBuilder.append(updatedBalance);
+
+    printWriter.print(stringBuilder.toString());
+    printWriter.flush();
   }
 
   public Student findStudent(String studentID) {
