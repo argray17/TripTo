@@ -4,6 +4,8 @@ import com.redhawkride.controller.RedHawkRideController;
 import com.redhawkride.model.Student;
 import com.redhawkride.model.Trip;
 import com.redhawkride.model.locationhandling.Location;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ public class RedHawkRideUI {
     this.rHRController = rHRController;
   }
 
-  public void mainMenu() {
+  public void mainMenu() throws FileNotFoundException {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter a number from the menu to continue. \n");
     System.out.println(
@@ -42,7 +44,7 @@ public class RedHawkRideUI {
     }
   }
 
-  public void newUser() {
+  public void newUser() throws FileNotFoundException {
     Scanner sc = new Scanner(System.in);
     Student student = new Student();
 
@@ -74,7 +76,7 @@ public class RedHawkRideUI {
 
   }
 
-  public void rider() {
+  public void rider() throws FileNotFoundException {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter your studentID: ");
     String id = sc.nextLine();
@@ -154,7 +156,7 @@ public class RedHawkRideUI {
     } while (choice != 3);
   }
 
-  public void driver() {
+  public void driver() throws FileNotFoundException {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter your studentID: ");
     String id = sc.nextLine();
