@@ -98,6 +98,8 @@ public class RedHawkRideUI {
           Float startLon = sc.nextFloat();
 
           Location startLocation = new Location(startLat, startLon);
+          trip.setStartLocation(startLocation);
+
 
           System.out.println("Enter your end location latitude: ");
           Float endLat = sc.nextFloat();
@@ -106,6 +108,8 @@ public class RedHawkRideUI {
           Float endLon = sc.nextFloat();
 
           Location endLocation = new Location(endLat, endLon);
+          trip.setEndLocation(endLocation);
+
           // estimate trip cost and display cost
           System.out.println(
               "Your estimated cost is: "
@@ -126,7 +130,22 @@ public class RedHawkRideUI {
 
         case 2:
           ArrayList<Trip> tripHistory = currentStudent.getTripHistory();
-          System.out.print(tripHistory);
+          for(int i = 0; i < tripHistory.size(); i++) {
+            Trip tripTemp = tripHistory.get(i);
+            System.out.println("Ride Request Info:");
+            System.out.println("Name of Requestor: " + tripTemp.getRider().getFirstName());
+            System.out.println("Start Location: " + tripTemp.getStartLocation());
+            System.out.println("End Location: " + tripTemp.getEndLocation());
+            System.out.println("Estimated Price: " + tripTemp.getEstimatedTripCost());
+
+            System.out.println("Driver Info:");
+            System.out.println("Driver: " + tripTemp.getDriver().getFirstName());
+
+            System.out.println("Ride Info:");
+            System.out.println("'Start ride' time: " + tripTemp.getStartTime() + "@" + tripTemp.getStartLocation());
+            System.out.println("'End ride' time: " + tripTemp.getEndTime() + "@" + tripTemp.getEndLocation());
+            System.out.println("Final cost: " + tripTemp.getFinalTripCost());
+          }
           break;
         case 3:
           mainMenu();
