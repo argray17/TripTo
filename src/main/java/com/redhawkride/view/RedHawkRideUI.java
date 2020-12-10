@@ -111,12 +111,13 @@ public class RedHawkRideUI {
           // estimate trip cost and display cost
           System.out.println(
               "Your estimated cost is: "
-                  + currentTrip.estimateTripCost(startLocation, endLocation));
+                  + trip.estimateTripCost(startLocation, endLocation));
 
           System.out.println("Do you want to request a ride for this trip? Y/N");
           char rideYN = sc.next().charAt(0);
 
           if (rideYN == 'Y' || rideYN == 'y') {
+            currentTrip = trip;
             rHRController.requestTrip(currentTrip);
           }
 
