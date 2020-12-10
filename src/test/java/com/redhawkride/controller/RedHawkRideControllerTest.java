@@ -18,9 +18,6 @@ class RedHawkRideControllerTest {
   RedHawkRideControllerTest() throws IOException, ParseException {}
 
   @Test
-  void setDriverStatus() {}
-
-  @Test
   void requestTrip() throws IOException {
       Trip trip = new Trip(
               redHawkRideController.findStudent("1"), redHawkRideController.findStudent("2"),
@@ -34,15 +31,6 @@ class RedHawkRideControllerTest {
       redHawkRideController.startTrip(trip);
       redHawkRideController.endTrip(trip);
   }
-
-  @Test
-  void startTrip() {}
-
-  @Test
-  void logTripProgress() {}
-
-  @Test
-  void endTrip() {}
 
   @Test
   void addCreatedAccount() throws IOException {
@@ -82,16 +70,4 @@ class RedHawkRideControllerTest {
 
     redHawkRideController.addCreatedAccount(student2);
   }
-
-  @Test
-  void processUnchargedTrips() {}
-
-  @Test
-  void processBalances() {}
-
-  @Test
-  void findStudent() {}
-
-  @Test
-  void findTrip() {}
 }
