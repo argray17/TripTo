@@ -155,7 +155,7 @@ public class Trip {
   public void setRouteLog(RouteLog routeLog) {}
 
   public void logLocation(boolean atEndOfTrip) {
-    routeLog.addEvent(driver.getCurrentLocation(), new Date(), atEndOfTrip);
+    //routeLog.addEvent(driver.getCurrentLocation(), new Date(), atEndOfTrip);
   }
 
   public Money getEstimatedTripCost() {

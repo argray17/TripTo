@@ -1,11 +1,15 @@
 package com.redhawkride.controller;
 
 import com.redhawkride.model.Student;
+import com.redhawkride.model.Trip;
+import com.redhawkride.model.locationhandling.Location;
 import com.redhawkride.model.moneyhandling.AccountBalance;
 import com.redhawkride.model.moneyhandling.Money;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 
 class RedHawkRideControllerTest {
@@ -17,7 +21,19 @@ class RedHawkRideControllerTest {
   void setDriverStatus() {}
 
   @Test
-  void requestTrip() {}
+  void requestTrip() throws IOException {
+      Trip trip = new Trip(
+              redHawkRideController.findStudent("1"), redHawkRideController.findStudent("2"),
+              "1234", new Location(1,2),
+              new Location(3,4), new Date(), new Date(),
+              new Money(new BigDecimal(15)), new Money( new BigDecimal(20))
+      );
+
+      redHawkRideController.getListOfAvailableDrivers().addStudent(redHawkRideController.findStudent("1"));
+      redHawkRideController.requestTrip(trip);
+      redHawkRideController.startTrip(trip);
+      redHawkRideController.endTrip(trip);
+  }
 
   @Test
   void startTrip() {}

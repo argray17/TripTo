@@ -20,7 +20,7 @@ public class StudentsList {
   }
 
   public Student findNearest(Location location) {
-    Student nearest = listOfStudents.get(1);
+    Student nearest = listOfStudents.get(0);
     for (Student student : listOfStudents) {
       if (student.closerThan(nearest)) {
         nearest = student;

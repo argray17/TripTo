@@ -77,7 +77,7 @@ public class RedHawkRideController {
     listOfTripsInProgress.addTrip(trip);
   }
 
-  public void startTrip(Trip trip) {
+  public void startTrip(Trip trip) throws IOException {
     trip.setStartTime();
     trip.setRouteLog(new RouteLog());
     trip.logLocation(false);
@@ -181,5 +181,9 @@ public class RedHawkRideController {
 
   public Trip findTrip(String tripID) {
     return mapOfTrips.findTrip((tripID));
+  }
+
+  public StudentsList getListOfAvailableDrivers() {
+    return this.listOfAvailableDrivers;
   }
 }

@@ -17,10 +17,11 @@ public class TripsMap {
     mapOfTrips = new HashMap<>();
   }
 
-  public void addTrip(Trip trip) {
+  public void addTrip(Trip trip) throws IOException {
     String key = genUniqueKey();
     trip.setTripID(key);
     mapOfTrips.put(key, trip);
+    writeToFile(new File("src/main/java/com/redhawkride/data/Trips.csv"));
   }
 
   private String genUniqueKey() {
@@ -29,41 +30,6 @@ public class TripsMap {
       key = UUID.randomUUID().toString();
     }
     return key;
-  }
-
-  public void writeTripToFile(Trip trip) throws FileNotFoundException {
-    FileReader fileReader = new FileReader("src/main/java/com/redhawkride/data/Trips.csv");
-    PrintWriter printWriter = new PrintWriter(String.valueOf(fileReader));
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-    StringBuilder stringBuilder = new StringBuilder();
-
-    String driver = trip.getDriver().getStudentID();
-    String rider = trip.getRider().getStudentID();
-    String tripID = trip.getTripID();
-    String startLocationLat = Float.toString(trip.getStartLocation().getLatitude());
-    String startLocationLon = Float.toString(trip.getStartLocation().getLongitude());
-    String endLocationLat = Float.toString(trip.getEndLocation().getLatitude());
-    String endLocationLon = Float.toString(trip.getEndLocation().getLongitude());
-    String startTime = dateFormat.format(trip.getStartTime());
-    String endTime = dateFormat.format(trip.getEndTime());
-    String estimatedTripCost =
-        String.valueOf(trip.getEstimatedTripCost().getAmount().doubleValue());
-    String finalTripCost = String.valueOf(trip.getFinalTripCost().getAmount().doubleValue());
-
-    stringBuilder.append(driver + ",");
-    stringBuilder.append(rider + ",");
-    stringBuilder.append(tripID + ",");
-    stringBuilder.append(startLocationLat + ",");
-    stringBuilder.append(startLocationLon + ",");
-    stringBuilder.append(endLocationLat + ",");
-    stringBuilder.append(endLocationLon + ",");
-    stringBuilder.append(startTime + ",");
-    stringBuilder.append(endTime + ",");
-    stringBuilder.append(estimatedTripCost + ",");
-    stringBuilder.append(finalTripCost + "\n");
-
-    printWriter.print(stringBuilder.toString());
-    printWriter.flush();
   }
 
   public void loadFromFile(File file, StudentsMap mapOfStudents)
