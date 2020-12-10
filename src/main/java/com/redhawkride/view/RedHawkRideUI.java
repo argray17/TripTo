@@ -4,8 +4,7 @@ import com.redhawkride.controller.RedHawkRideController;
 import com.redhawkride.model.Student;
 import com.redhawkride.model.Trip;
 import com.redhawkride.model.locationhandling.Location;
-
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +17,7 @@ public class RedHawkRideUI {
     this.rHRController = rHRController;
   }
 
-  public void mainMenu() throws FileNotFoundException {
+  public void mainMenu() throws IOException {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter a number from the menu to continue. \n");
     System.out.println(
@@ -44,7 +43,7 @@ public class RedHawkRideUI {
     }
   }
 
-  public void newUser() throws FileNotFoundException {
+  public void newUser() throws IOException {
     Scanner sc = new Scanner(System.in);
     Student student = new Student();
 
@@ -73,15 +72,13 @@ public class RedHawkRideUI {
     student.setBankRoutingNumber(routingNumber);
 
     rHRController.addCreatedAccount(student);
-
   }
 
-  public void rider() throws FileNotFoundException {
+  public void rider() throws IOException {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter your studentID: ");
     String id = sc.nextLine();
     currentStudent = rHRController.findStudent(id);
-
 
     System.out.println(
         "\t(1) Provide your start and end location as (latitude, longitude) pairs \nto receive estimated cost for the ride"
@@ -102,7 +99,6 @@ public class RedHawkRideUI {
           Location startLocation = new Location(startLat, startLon);
           trip.setStartLocation(startLocation);
 
-
           System.out.println("Enter your end location latitude: ");
           Float endLat = sc.nextFloat();
 
@@ -120,7 +116,7 @@ public class RedHawkRideUI {
           System.out.println("Do you want to request a ride for this trip? Y/N");
           char rideYN = sc.next().charAt(0);
 
-          if (rideYN== 'Y' || rideYN == 'y') {
+          if (rideYN == 'Y' || rideYN == 'y') {
             rHRController.requestTrip(currentTrip);
           }
 
@@ -132,7 +128,7 @@ public class RedHawkRideUI {
 
         case 2:
           ArrayList<Trip> tripHistory = currentStudent.getTripHistory();
-          for(int i = 0; i < tripHistory.size(); i++) {
+          for (int i = 0; i < tripHistory.size(); i++) {
             Trip tripTemp = tripHistory.get(i);
             System.out.println("Ride Request Info:");
             System.out.println("Name of Requestor: " + tripTemp.getRider().getFirstName());
@@ -144,8 +140,13 @@ public class RedHawkRideUI {
             System.out.println("Driver: " + tripTemp.getDriver().getFirstName());
 
             System.out.println("Ride Info:");
-            System.out.println("'Start ride' time: " + tripTemp.getStartTime() + "@" + tripTemp.getStartLocation());
-            System.out.println("'End ride' time: " + tripTemp.getEndTime() + "@" + tripTemp.getEndLocation());
+            System.out.println(
+                "'Start ride' time: "
+                    + tripTemp.getStartTime()
+                    + "@"
+                    + tripTemp.getStartLocation());
+            System.out.println(
+                "'End ride' time: " + tripTemp.getEndTime() + "@" + tripTemp.getEndLocation());
             System.out.println("Final cost: " + tripTemp.getFinalTripCost());
           }
           break;
@@ -156,7 +157,7 @@ public class RedHawkRideUI {
     } while (choice != 3);
   }
 
-  public void driver() throws FileNotFoundException {
+  public void driver() throws IOException {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter your studentID: ");
     String id = sc.nextLine();

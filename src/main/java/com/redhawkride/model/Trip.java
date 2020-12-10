@@ -130,7 +130,6 @@ public class Trip {
             % 60; // time difference converted from milliseconds to min
     finalTripCost =
         new Money(new BigDecimal(0.25 * time + 0.5 * getDistance(startLocation, endLocation)));
-
   }
 
   public String getTripID() {
@@ -146,6 +145,7 @@ public class Trip {
   }
 
   public void setStartTime() {}
+
   public void setEndTime() {}
 
   public Money getFinalTripCost() {

@@ -16,7 +16,8 @@ public class StudentsMap {
     mapOfStudents = new HashMap<>();
   }
 
-  public boolean addStudent(Student student) throws FileNotFoundException {
+  public boolean addStudent(Student student) throws IOException {
+    File file = new File("src/main/java/com/redhawkride/data/Students.csv");
     String key = student.getStudentID();
     if (mapOfStudents.containsKey(key)) {
       System.out.println("An account already exists under this Student ID.");
@@ -24,43 +25,10 @@ public class StudentsMap {
       // } else if (LoadFromFile.validateStudentID()) {
     } else {
       mapOfStudents.put(key, student);
-      writeStudentToFile(student);
+      writeToFile(file);
       return true;
     }
   }
-
-  public void writeStudentToFile(Student student) throws FileNotFoundException {
-    FileReader fileReader = new FileReader("src/main/java/com/redhawkride/data/Students.csv");
-    PrintWriter printWriter = new PrintWriter(String.valueOf(fileReader));
-    StringBuilder stringBuilder = new StringBuilder();
-
-    String studentID = student.getStudentID();
-    String password = student.getPassword();
-    String firstName = student.getFirstName();
-    String lastName = student.getLastName();
-    String phoneNumber = student.getPhoneNumber();
-    String address = student.getAddress();
-    String bankAccountNumber = student.getBankAccountNumber();
-    String bankRoutingNumber = student.getBankRoutingNumber();
-    AccountBalance accountBalance = student.getAccountBalance();
-    Money money = accountBalance.getCurrentBalance();
-    BigDecimal bigDecimal = money.getAmount();
-    String amount = String.valueOf(bigDecimal.doubleValue());
-
-    stringBuilder.append(studentID + ",");
-    stringBuilder.append(password + ",");
-    stringBuilder.append(firstName + ",");
-    stringBuilder.append(lastName + ",");
-    stringBuilder.append(phoneNumber + ",");
-    stringBuilder.append(address + ",");
-    stringBuilder.append(bankAccountNumber + ",");
-    stringBuilder.append(bankRoutingNumber + ",");
-    stringBuilder.append(amount + "\n");
-
-    printWriter.print(stringBuilder.toString());
-    printWriter.flush();
-  }
-
 
   public boolean validateStudentID(String key) {
     if (mapOfStudents.containsKey(key)) {
@@ -100,11 +68,9 @@ public class StudentsMap {
       String password = values[1];
       String firstName = values[2];
       String lastName = values[3];
-      String phoneNumber = values[4];
-      String address = values[5];
-      String bankAccountNumber = values[6];
-      String bankRoutingNumber = values[7];
-      BigDecimal bigDecimal = new BigDecimal(Double.valueOf(values[8]));
+      String bankAccountNumber = values[4];
+      String bankRoutingNumber = values[5];
+      BigDecimal bigDecimal = new BigDecimal(Double.valueOf(values[6]));
       Money money = new Money(bigDecimal);
       AccountBalance accountBalance = new AccountBalance(money);
       Student student =
@@ -113,8 +79,6 @@ public class StudentsMap {
               password,
               firstName,
               lastName,
-              phoneNumber,
-              address,
               bankAccountNumber,
               bankRoutingNumber,
               accountBalance);
@@ -137,8 +101,6 @@ public class StudentsMap {
       String password = student.getPassword();
       String firstName = student.getFirstName();
       String lastName = student.getLastName();
-      String phoneNumber = student.getPhoneNumber();
-      String address = student.getAddress();
       String bankAccountNumber = student.getBankAccountNumber();
       String bankRoutingNumber = student.getBankRoutingNumber();
       AccountBalance accountBalance = student.getAccountBalance();
@@ -150,8 +112,6 @@ public class StudentsMap {
       stringBuilder.append(password + ",");
       stringBuilder.append(firstName + ",");
       stringBuilder.append(lastName + ",");
-      stringBuilder.append(phoneNumber + ",");
-      stringBuilder.append(address + ",");
       stringBuilder.append(bankAccountNumber + ",");
       stringBuilder.append(bankRoutingNumber + ",");
       stringBuilder.append(amount + "\n");

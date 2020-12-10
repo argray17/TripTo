@@ -6,14 +6,7 @@ import com.redhawkride.model.moneyhandling.Money;
 import java.util.ArrayList;
 
 public class Student {
-  private String studentID,
-      password,
-      firstName,
-      lastName,
-      phoneNumber,
-      address,
-      bankAccountNumber,
-      bankRoutingNumber;
+  private String studentID, password, firstName, lastName, bankAccountNumber, bankRoutingNumber;
   private AccountBalance accountBalance;
   private ArrayList<Trip> tripHistory;
   private boolean isAvailable = false;
@@ -27,8 +20,6 @@ public class Student {
       String password,
       String firstName,
       String lastName,
-      String phoneNumber,
-      String address,
       String bankAccountNumber,
       String bankRoutingNumber,
       AccountBalance accountBalance) {
@@ -36,8 +27,6 @@ public class Student {
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.phoneNumber = phoneNumber;
-    this.address = address;
     this.bankAccountNumber = bankAccountNumber;
     this.bankRoutingNumber = bankRoutingNumber;
     this.accountBalance = accountBalance;
@@ -58,14 +47,6 @@ public class Student {
 
   public String getLastName() {
     return lastName;
-  }
-
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  public String getAddress() {
-    return address;
   }
 
   public String getBankAccountNumber() {

@@ -47,7 +47,7 @@ public class TripsMap {
     String startTime = dateFormat.format(trip.getStartTime());
     String endTime = dateFormat.format(trip.getEndTime());
     String estimatedTripCost =
-            String.valueOf(trip.getEstimatedTripCost().getAmount().doubleValue());
+        String.valueOf(trip.getEstimatedTripCost().getAmount().doubleValue());
     String finalTripCost = String.valueOf(trip.getFinalTripCost().getAmount().doubleValue());
 
     stringBuilder.append(driver + ",");
@@ -76,7 +76,6 @@ public class TripsMap {
     while ((line = bufferedReader.readLine()) != null) {
       String[] values = line.split(",");
       String driverID = values[0];
-      System.out.println(mapOfStudents.findStudent(driverID));
       Student driver = mapOfStudents.findStudent(driverID);
       String riderID = values[1];
       Student rider = mapOfStudents.findStudent(riderID);
