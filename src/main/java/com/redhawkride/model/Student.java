@@ -41,7 +41,7 @@ public class Student {
     this.bankAccountNumber = bankAccountNumber;
     this.bankRoutingNumber = bankRoutingNumber;
     this.accountBalance = accountBalance;
-
+    tripHistory = new ArrayList<>();
   }
 
   public String getStudentID() {

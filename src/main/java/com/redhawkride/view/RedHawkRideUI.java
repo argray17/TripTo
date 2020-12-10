@@ -16,10 +16,8 @@ public class RedHawkRideUI {
     this.rHRController = rHRController;
   }
 
-  Scanner sc = new Scanner(System.in);
-
   public void mainMenu() {
-
+    Scanner sc = new Scanner(System.in);
     System.out.println("Enter a number from the menu to continue. \n");
     System.out.println(
         "\t(1) Register as new user. \n\t(2) Continue as Rider. \n\t(3) Continue as Driver. "
@@ -30,8 +28,8 @@ public class RedHawkRideUI {
     switch (choice) {
       case 1:
         newUser();
+        mainMenu();
         break;
-
       case 2:
         rider();
         break;
@@ -45,6 +43,7 @@ public class RedHawkRideUI {
   }
 
   public void newUser() {
+    Scanner sc = new Scanner(System.in);
     Student student = new Student();
 
     System.out.println("Enter your First Name: ");
@@ -72,10 +71,11 @@ public class RedHawkRideUI {
     student.setBankRoutingNumber(routingNumber);
 
     rHRController.addCreatedAccount(student);
-    mainMenu();
+
   }
 
   public void rider() {
+    Scanner sc = new Scanner(System.in);
     System.out.println("Enter your studentID: ");
     String id = sc.nextLine();
     currentStudent = rHRController.findStudent(id);
@@ -136,6 +136,7 @@ public class RedHawkRideUI {
   }
 
   public void driver() {
+    Scanner sc = new Scanner(System.in);
     System.out.println("Enter your studentID: ");
     String id = sc.nextLine();
     currentStudent = rHRController.findStudent(id);
