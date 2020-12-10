@@ -1,7 +1,5 @@
 package com.redhawkride.controller.lists;
 
-import com.redhawkride.controller.RedHawkRideController;
-import com.redhawkride.controller.maps.StudentsMap;
 import com.redhawkride.controller.maps.TripsMap;
 import com.redhawkride.model.Trip;
 import java.io.*;

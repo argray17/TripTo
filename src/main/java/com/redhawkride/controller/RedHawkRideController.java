@@ -77,7 +77,7 @@ public class RedHawkRideController {
     listOfTripsInProgress.addTrip(trip);
   }
 
-  public void startTrip(Trip trip) {
+  public void startTrip(Trip trip) throws IOException {
     trip.setStartTime();
     trip.setRouteLog(new RouteLog());
     trip.logLocation(false);
@@ -107,7 +107,7 @@ public class RedHawkRideController {
     listOfAvailableDrivers.addStudent(driver);
   }
 
-  public boolean addCreatedAccount(Student createdAccount) {
+  public boolean addCreatedAccount(Student createdAccount) throws IOException {
     return this.mapOfStudents.addStudent(createdAccount);
   }
 
@@ -156,9 +156,12 @@ public class RedHawkRideController {
     String bankAccountNumber = transaction.getBankAccountNumber();
     String bankRoutingNumber = transaction.getRoutingNumber();
     String dateOfTransaction = dateFormat.format(transaction.getDateOfTransaction());
-    String amountOfTransaction = String.valueOf(transaction.getAmountOfTransaction().getAmount().doubleValue());
-    String initialBalance = String.valueOf(transaction.getInitialBalance().getAmount().doubleValue());
-    String updatedBalance = String.valueOf(transaction.getUpdatedBalance().getAmount().doubleValue());
+    String amountOfTransaction =
+        String.valueOf(transaction.getAmountOfTransaction().getAmount().doubleValue());
+    String initialBalance =
+        String.valueOf(transaction.getInitialBalance().getAmount().doubleValue());
+    String updatedBalance =
+        String.valueOf(transaction.getUpdatedBalance().getAmount().doubleValue());
 
     stringBuilder.append(student + ",");
     stringBuilder.append(bankAccountNumber + ",");
@@ -178,5 +181,9 @@ public class RedHawkRideController {
 
   public Trip findTrip(String tripID) {
     return mapOfTrips.findTrip((tripID));
+  }
+
+  public StudentsList getListOfAvailableDrivers() {
+    return this.listOfAvailableDrivers;
   }
 }

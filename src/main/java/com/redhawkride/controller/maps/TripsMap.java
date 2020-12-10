@@ -1,6 +1,5 @@
 package com.redhawkride.controller.maps;
 
-import com.redhawkride.controller.RedHawkRideController;
 import com.redhawkride.model.Student;
 import com.redhawkride.model.Trip;
 import com.redhawkride.model.locationhandling.Location;
@@ -18,10 +17,11 @@ public class TripsMap {
     mapOfTrips = new HashMap<>();
   }
 
-  public void addTrip(Trip trip) {
+  public void addTrip(Trip trip) throws IOException {
     String key = genUniqueKey();
     trip.setTripID(key);
     mapOfTrips.put(key, trip);
+    writeToFile(new File("src/main/java/com/redhawkride/data/Trips.csv"));
   }
 
   private String genUniqueKey() {
@@ -42,7 +42,6 @@ public class TripsMap {
     while ((line = bufferedReader.readLine()) != null) {
       String[] values = line.split(",");
       String driverID = values[0];
-      System.out.println(mapOfStudents.findStudent(driverID));
       Student driver = mapOfStudents.findStudent(driverID);
       String riderID = values[1];
       Student rider = mapOfStudents.findStudent(riderID);
@@ -75,7 +74,7 @@ public class TripsMap {
               finalTripCost);
 
       driver.addTrip(trip);
-      // rider.addTrip(trip);
+      rider.addTrip(trip);
 
       mapOfTrips.put(trip.getTripID(), trip);
     }
