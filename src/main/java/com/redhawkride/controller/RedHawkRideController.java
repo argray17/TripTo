@@ -107,7 +107,7 @@ public class RedHawkRideController {
     listOfAvailableDrivers.addStudent(driver);
   }
 
-  public boolean addCreatedAccount(Student createdAccount) {
+  public boolean addCreatedAccount(Student createdAccount) throws FileNotFoundException {
     return this.mapOfStudents.addStudent(createdAccount);
   }
 
