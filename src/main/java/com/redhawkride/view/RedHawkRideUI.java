@@ -126,7 +126,7 @@ public class RedHawkRideUI {
 
         case 2:
           ArrayList<Trip> tripHistory = currentStudent.getTripHistory();
-          // replace ID's with name
+          System.out.print(tripHistory);
           break;
         case 3:
           mainMenu();
