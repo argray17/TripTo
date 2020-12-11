@@ -1,13 +1,10 @@
-package com.redhawkride.model.moneyhandling;
+package com.tripto.model.moneyhandling;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Locale;
 
-/*
-   https://stackoverflow.com/questions/1359817/using-bigdecimal-to-work-with-currencies
-*/
 public class Money {
   private static final Currency USD = Currency.getInstance("USD");
   private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
