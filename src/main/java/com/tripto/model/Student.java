@@ -1,14 +1,16 @@
 package com.tripto.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class Student {
   String studentID, lastName, middleInitial, firstName, address, phoneNumber, driversLicenseNumber;
-  Calendar birthDate, dateOfLicenseExpiration;
+  Date birthDate, dateOfLicenseExpiration;
   StudentVehicle vehicle;
   boolean validDriver;
 
-  public Student() {}
+  public Student() {
+    this.vehicle = new StudentVehicle();
+  }
 
   public Student(
       String studentID,
@@ -18,9 +20,8 @@ public class Student {
       String address,
       String phoneNumber,
       String driversLicenseNumber,
-      Calendar birthDate,
-      Calendar dateOfLicenseExpiration,
-      StudentVehicle vehicle,
+      Date birthDate,
+      Date dateOfLicenseExpiration,
       boolean validDriver) {
     this.studentID = studentID;
     this.lastName = lastName;
@@ -31,7 +32,7 @@ public class Student {
     this.driversLicenseNumber = driversLicenseNumber;
     this.birthDate = birthDate;
     this.dateOfLicenseExpiration = dateOfLicenseExpiration;
-    this.vehicle = vehicle;
+    this.vehicle = new StudentVehicle();
     this.validDriver = validDriver;
   }
 
@@ -91,19 +92,19 @@ public class Student {
     this.driversLicenseNumber = driversLicenseNumber;
   }
 
-  public Calendar getBirthDate() {
+  public Date getBirthDate() {
     return birthDate;
   }
 
-  public void setBirthDate(Calendar birthDate) {
+  public void setBirthDate(Date birthDate) {
     this.birthDate = birthDate;
   }
 
-  public Calendar getDateOfLicenseExpiration() {
+  public Date getDateOfLicenseExpiration() {
     return dateOfLicenseExpiration;
   }
 
-  public void setDateOfLicenseExpiration(Calendar dateOfLicenseExpiration) {
+  public void setDateOfLicenseExpiration(Date dateOfLicenseExpiration) {
     this.dateOfLicenseExpiration = dateOfLicenseExpiration;
   }
 
@@ -125,18 +126,18 @@ public class Student {
 
   public class StudentVehicle {
     String make, model, year, color, licensePlateNumber, insuranceNumber;
-    Calendar dateOfInsuranceExpiration;
+    Date dateOfInsuranceExpiration;
 
-    public StudentVehicle() {}
+    private StudentVehicle() {}
 
-    public StudentVehicle(
+    private StudentVehicle(
         String make,
         String model,
         String year,
         String color,
         String licensePlateNumber,
         String insuranceNumber,
-        Calendar dateOfInsuranceExpiration) {
+        Date dateOfInsuranceExpiration) {
       this.make = make;
       this.model = model;
       this.year = year;
@@ -194,11 +195,11 @@ public class Student {
       this.insuranceNumber = insuranceNumber;
     }
 
-    public Calendar getDateOfInsuranceExpiration() {
+    public Date getDateOfInsuranceExpiration() {
       return dateOfInsuranceExpiration;
     }
 
-    public void setDateOfInsuranceExpiration(Calendar dateOfInsuranceExpiration) {
+    public void setDateOfInsuranceExpiration(Date dateOfInsuranceExpiration) {
       this.dateOfInsuranceExpiration = dateOfInsuranceExpiration;
     }
   }

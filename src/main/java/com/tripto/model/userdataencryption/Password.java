@@ -70,3 +70,4 @@ public class Password {
     return Base64.getDecoder().decode(property);
   }
 }
+
