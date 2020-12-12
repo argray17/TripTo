@@ -8,9 +8,7 @@ public class Student {
   StudentVehicle vehicle;
   boolean validDriver;
 
-  public Student() {
-    this.vehicle = new StudentVehicle();
-  }
+  public Student() {}
 
   public Student(
       String studentID,
@@ -32,7 +30,6 @@ public class Student {
     this.driversLicenseNumber = driversLicenseNumber;
     this.birthDate = birthDate;
     this.dateOfLicenseExpiration = dateOfLicenseExpiration;
-    this.vehicle = new StudentVehicle();
     this.validDriver = validDriver;
   }
 
@@ -124,11 +121,11 @@ public class Student {
     this.validDriver = validDriver;
   }
 
-  public class StudentVehicle {
+  public static class StudentVehicle {
     String make, model, year, color, licensePlateNumber, insuranceNumber;
     Date dateOfInsuranceExpiration;
 
-    private StudentVehicle() {}
+    public StudentVehicle() {}
 
     private StudentVehicle(
         String make,

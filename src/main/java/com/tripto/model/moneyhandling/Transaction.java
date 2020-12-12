@@ -6,7 +6,7 @@ import java.util.Date;
 public class Transaction {
   private Account studentAccount;
   private Money beginBalance, endBalance, amountOfTransaction;
-  private String studentBankAccountNumber, studentBankRoutingNumber;
+  private String studentBankAccountNumber, studentBankRoutingNumber, transactionID;
   private Date timeOfTransaction;
   private boolean transactionApproved;
 
@@ -19,6 +19,7 @@ public class Transaction {
       Money amountOfTransaction,
       String studentBankAccountNumber,
       String studentBankRoutingNumber,
+      String transactionID,
       Date timeOfTransaction,
       boolean transactionApproved) {
     this.studentAccount = studentAccount;
@@ -27,6 +28,7 @@ public class Transaction {
     this.amountOfTransaction = amountOfTransaction;
     this.studentBankAccountNumber = studentBankAccountNumber;
     this.studentBankRoutingNumber = studentBankRoutingNumber;
+    this.transactionID = transactionID;
     this.timeOfTransaction = timeOfTransaction;
     this.transactionApproved = transactionApproved;
   }
@@ -77,6 +79,14 @@ public class Transaction {
 
   public void setStudentBankRoutingNumber(String studentBankRoutingNumber) {
     this.studentBankRoutingNumber = studentBankRoutingNumber;
+  }
+
+  public String getTransactionID() {
+    return transactionID;
+  }
+
+  public void setTransactionID(String transactionID) {
+    this.transactionID = transactionID;
   }
 
   public Date getTimeOfTransaction() {
